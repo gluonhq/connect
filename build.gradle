@@ -1,0 +1,61 @@
+plugins {
+    id "maven"
+    id "com.github.hierynomus.license" version "0.15.0"
+    id "org.openjfx.javafxplugin" version "0.0.5"
+}
+
+apply from: rootProject.file('gradle/mavenPublish.gradle')
+apply from: rootProject.file('gradle/code-quality.gradle')
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+group = 'com.gluonhq'
+version = '2.0.0-SNAPSHOT'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    implementation 'org.glassfish:javax.json:1.1.4'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+
+    testCompile 'io.vertx:vertx-core:3.6.0'
+    testImplementation 'org.testng:testng:6.9.10'
+}
+
+compileJava {
+    options.compilerArgs += [
+            '--add-exports',
+            'javafx.base/com.sun.javafx.event=com.gluonhq.connect'
+    ]
+}
+
+javafx {
+    modules = [ 'javafx.graphics' ]
+}
+
+test {
+    useTestNG()
+}
+
+javadoc {
+//    exclude('com/gluonhq/impl/**/*')
+
+    options.addStringOption("-add-exports", "javafx.base/com.sun.javafx.event=com.gluonhq.connect")
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}

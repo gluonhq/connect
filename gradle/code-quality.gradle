@@ -1,0 +1,14 @@
+apply plugin: 'com.github.hierynomus.license'
+
+license {
+    header = rootProject.file('gradle/HEADER')
+    strictCheck = true
+    skipExistingHeaders = true
+    ignoreFailures = false
+    mapping {
+        java = 'SLASHSTAR_STYLE'
+        fxml = 'XML_STYLE'
+    }
+    ext.year   = Calendar.getInstance().get(Calendar.YEAR)
+    ext.author = 'Gluon'
+}
