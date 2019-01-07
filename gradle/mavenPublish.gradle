@@ -1,83 +1,99 @@
+apply plugin: 'maven-publish'
 apply plugin: 'signing'
 
-configurations {
-    samples { extendsFrom runtime}
-    jdk
-    maven { extendsFrom archives }
-    published { extendsFrom archives, signatures}
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    archiveClassifier = 'sources'
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    from javadoc.destinationDir
+    archiveClassifier = 'javadoc'
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom {
+                name = 'Gluon Connect'
+                description = "Gluon Connect"
+                url = 'https://gluonhq.com/products/mobile/connect/'
+
+                developers {
+                    developer {
+                        name = 'Joeri Sykora'
+                        email = 'joeri.sykora@gluonhq.com'
+                        organization = 'Gluon'
+                        organizationUrl = 'https://gluonhq.com'
+                    }
+                }
+
+                licenses {
+                    license {
+                        name = 'The 3-Clause BSD License'
+                        url = 'http://www.opensource.org/licenses/bsd-license.php'
+                        distribution = 'repo'
+                    }
+                }
+
+                scm {
+                    connection = 'scm:git:https://github.com/gluonhq/connect.git'
+                    developerConnection = 'scm:git:ssh://git@github.com/gluonhq/connect.git'
+                    url = 'https://github.com/gluonhq/connect'
+                }
+            }
+
+            pom.withXml {
+                Node pomNode = asNode()
+                pomNode.dependencies.'*'.findAll() {
+                    it.groupId.text() == 'org.openjfx'
+                }.each {
+                    it.parent().remove(it)
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            // to upload release, use:
+            // ./gradlew -PrepositoryUrl=https://oss.sonatype.org/service/local/staging/deploy/maven2 publish
+            url = getStringProperty('repositoryUrl', 'https://oss.sonatype.org/content/repositories/snapshots/')
+            credentials {
+                username = getStringPropertyDefaultAsProperty('repositoryUsername', 'sonatypeUsername')
+                password = getStringPropertyDefaultAsProperty('repositoryPassword', 'sonatypePassword')
+            }
+        }
+    }
 }
 
 signing {
-    required = { gradle.taskGraph.hasTask(uploadPublished) && !version.endsWith("SNAPSHOT") }
-    sign configurations.archives
+    sign publishing.publications.maven
+    required = { gradle.taskGraph.hasTask(publish) && !version.endsWith("SNAPSHOT") }
 }
 
-repositories {
-    maven { url 'https://oss.sonatype.org/content/groups/staging' }
-    mavenCentral()
-}
-
-uploadPublished {
-
-    doFirst {
-        // configure repositories in a doFirst so we can late bind the properties
-        checkPasswords()
-        repositories {
-            mavenDeployer {
-                configurePOM(pom)
-                beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-                snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-                    authentication userName: sonatypeUsername, password: sonatypePassword
-                }
-                repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-                    authentication userName: sonatypeUsername, password: sonatypePassword
-                }
-            }
-        }
+private String getStringProperty(String name, String defaultValue) {
+    if (!project.hasProperty(name)) {
+        return defaultValue
     }
-    configuration = configurations.published
+
+    def propertyValue = project.property(name)
+    return propertyValue != null ? propertyValue.toString().trim() : defaultValue
 }
 
-install {
-    doFirst {
-        configurePOM(repositories.mavenInstaller.pom)
+private String getStringPropertyDefaultAsProperty(String name, String defaultProperty) {
+    if (!project.hasProperty(name)) {
+        return project.hasProperty(defaultProperty) ? project.property(defaultProperty) : System.getenv(name)
     }
-    configuration = configurations.published
-}
 
-private configurePOM(def pom) {
-    pom.project {
-        name 'Gluon Connect'
-        description "Gluon Connect"
-        url 'http://gluonhq.com/open-source/connect'
-        modelVersion '4.0.0'
-        packaging 'jar'
-        scm {
-            connection 'scm:hg:https://bitbucket.org/gluon-oss/gluon-connect'
-            developerConnection 'scm:hg:https://bitbucket.org/gluon-oss/gluon-connect'
-            url 'https://bitbucket.org/gluon-oss/gluon-connect'
-        }
-        developers {
-            developer {
-                name = 'Joeri Sykora'
-                email = 'joeri.sykora@gluonhq.com'
-                organization = 'Gluon'
-                organizationUrl = 'http://gluonhq.com'
-            }
-        }
-        licenses {
-            license {
-                name 'The 3-Clause BSD License'
-                url 'http://www.opensource.org/licenses/bsd-license.php'
-                distribution 'repo'
-            }
-        }
-    }
-}
-
-ext.checkPasswords =  {
-    if (!project.hasProperty('sonatypeUsername') || !project.hasProperty('sonatypePassword')) {
-        println "Please provide sonatypeUsername and sonatypePassword as gradle properties when uploading artifacts."
-        throw new StopExecutionException()
+    def propertyValue = project.property(name)
+    if (propertyValue != null) {
+        return propertyValue.toString().trim()
+    } else {
+        return project.hasProperty(defaultProperty) ? project.property(defaultProperty) : System.getenv(name)
     }
 }
