@@ -136,9 +136,9 @@ public class JsonConverterTest {
         assertEquals(object.getStringMap().get("string2key"), "string2value");
         assertEquals(object.getStringMap().get("string3key"), "string3value");
         assertEquals(object.getIntegerMap().size(), 3);
-        assertEquals(object.getIntegerMap().get("int1key"), new Integer(1));
-        assertEquals(object.getIntegerMap().get("int2key"), new Integer(2));
-        assertEquals(object.getIntegerMap().get("int3key"), new Integer(3));
+        assertEquals(object.getIntegerMap().get("int1key"), Integer.valueOf(1));
+        assertEquals(object.getIntegerMap().get("int2key"), Integer.valueOf(2));
+        assertEquals(object.getIntegerMap().get("int3key"), Integer.valueOf(3));
         assertEquals(object.getDoubleMap().size(), 3);
         assertEquals(object.getDoubleMap().get("dbl1key"), 1.0);
         assertEquals(object.getDoubleMap().get("dbl2key"), 2.1);
