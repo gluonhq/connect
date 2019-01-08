@@ -1,4 +1,5 @@
 plugins {
+    id "java-library"
     id "com.github.hierynomus.license" version "0.15.0"
     id "org.openjfx.javafxplugin" version "0.0.6"
 }
@@ -17,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.glassfish:javax.json:1.1.4'
+    api 'org.glassfish:javax.json:1.1.4'
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
 
     testCompile 'io.vertx:vertx-core:3.6.0'
@@ -43,8 +44,4 @@ javadoc {
 //    exclude('com/gluonhq/impl/**/*')
 
     options.addStringOption("-add-exports", "javafx.base/com.sun.javafx.event=com.gluonhq.connect")
-}
-
-artifacts {
-    archives sourcesJar, javadocJar
 }
