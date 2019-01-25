@@ -32,9 +32,6 @@ import com.gluonhq.connect.converter.InputStreamIterableInputConverter;
 import com.gluonhq.connect.converter.OutputStreamOutputConverter;
 import com.gluonhq.connect.source.RestDataSource;
 import com.gluonhq.connect.MultiValuedMap;
-import com.gluonhq.impl.connect.provider.RestListDataReader;
-import com.gluonhq.impl.connect.provider.RestObjectDataReader;
-import com.gluonhq.impl.connect.provider.RestObjectDataWriterAndRemover;
 
 /**
  * <p>The RestClient assists in using the {@link DataProvider} with HTTP URLs as the data source. For instance, to read
