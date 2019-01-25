@@ -24,12 +24,11 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.impl.connect.provider;
+package com.gluonhq.connect.provider;
 
 import com.gluonhq.connect.GluonObservableList;
 import com.gluonhq.connect.converter.InputStreamIterableInputConverter;
 import com.gluonhq.connect.converter.JsonIterableInputConverter;
-import com.gluonhq.connect.provider.ListDataReader;
 import com.gluonhq.connect.source.RestDataSource;
 
 import java.io.IOException;

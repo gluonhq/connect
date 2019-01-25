@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.gluonhq.impl.connect.provider;
+package com.gluonhq.connect.provider;
 
 import com.gluonhq.connect.GluonObservableObject;
 import com.gluonhq.connect.converter.InputStreamInputConverter;
@@ -32,8 +32,6 @@ import com.gluonhq.connect.converter.JsonOutputConverter;
 import com.gluonhq.connect.converter.OutputStreamOutputConverter;
 import com.gluonhq.connect.converter.StringOutputConverter;
 import com.gluonhq.connect.converter.VoidOutputConverter;
-import com.gluonhq.connect.provider.ObjectDataRemover;
-import com.gluonhq.connect.provider.ObjectDataWriter;
 import com.gluonhq.connect.source.RestDataSource;
 
 import java.io.IOException;
