@@ -27,7 +27,7 @@
 package com.gluonhq.impl.connect;
 
 import com.gluonhq.connect.ConnectStateEvent;
-import com.sun.javafx.event.EventHandlerManager;
+import com.gluonhq.impl.connect.event.ConnectEventDispatcher;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.event.Event;
@@ -72,46 +72,46 @@ public class EventHelper {
     final EventHandler<ConnectStateEvent> getOnRemoved() { return onRemoved.get(); }
     public final void setOnRemoved(EventHandler<ConnectStateEvent> value) { onRemoved.set(value); }
 
-    private EventHandlerManager internalEventDispatcher;
+    private ConnectEventDispatcher<ConnectStateEvent> internalEventDispatcher;
 
     public EventHelper(EventTarget bean) {
         this.target = bean;
-        onReady = new SimpleObjectProperty<EventHandler<ConnectStateEvent>>(bean, "onReady") {
+        onReady = new SimpleObjectProperty<>(bean, "onReady") {
             @Override
             protected void invalidated() {
                 EventHandler<ConnectStateEvent> handler = get();
                 setEventHandler(CONNECT_STATE_READY, handler);
             }
         };
-        onRunning = new SimpleObjectProperty<EventHandler<ConnectStateEvent>>(bean, "onRunning") {
+        onRunning = new SimpleObjectProperty<>(bean, "onRunning") {
             @Override
             protected void invalidated() {
                 EventHandler<ConnectStateEvent> handler = get();
                 setEventHandler(CONNECT_STATE_RUNNING, handler);
             }
         };
-        onFailed = new SimpleObjectProperty<EventHandler<ConnectStateEvent>>(bean, "onFailed") {
+        onFailed = new SimpleObjectProperty<>(bean, "onFailed") {
             @Override
             protected void invalidated() {
                 EventHandler<ConnectStateEvent> handler = get();
                 setEventHandler(CONNECT_STATE_FAILED, handler);
             }
         };
-        onSucceeded = new SimpleObjectProperty<EventHandler<ConnectStateEvent>>(bean, "onSucceeded") {
+        onSucceeded = new SimpleObjectProperty<>(bean, "onSucceeded") {
             @Override
             protected void invalidated() {
                 EventHandler<ConnectStateEvent> handler = get();
                 setEventHandler(CONNECT_STATE_SUCCEEDED, handler);
             }
         };
-        onCancelled = new SimpleObjectProperty<EventHandler<ConnectStateEvent>>(bean, "onCancelled") {
+        onCancelled = new SimpleObjectProperty<>(bean, "onCancelled") {
             @Override
             protected void invalidated() {
                 EventHandler<ConnectStateEvent> handler = get();
                 setEventHandler(CONNECT_STATE_CANCELLED, handler);
             }
         };
-        onRemoved = new SimpleObjectProperty<EventHandler<ConnectStateEvent>>(bean, "onRemoved") {
+        onRemoved = new SimpleObjectProperty<>(bean, "onRemoved") {
             @Override
             protected void invalidated() {
                 EventHandler<ConnectStateEvent> handler = get();
@@ -126,20 +126,19 @@ public class EventHelper {
      * first. This is used for registering the user-defined onFoo event
      * handlers.
      *
-     * @param <T> the specific event class of the handler
      * @param eventType the event type to associate with the given eventHandler
      * @param eventHandler the handler to register, or null to unregister
      */
-    private <T extends Event> void setEventHandler(
-            final EventType<T> eventType,
-            final EventHandler<? super T> eventHandler) {
+    private void setEventHandler(
+            final EventType<ConnectStateEvent> eventType,
+            final EventHandler<ConnectStateEvent> eventHandler) {
         getInternalEventDispatcher()
                 .setEventHandler(eventType, eventHandler);
     }
 
-    private EventHandlerManager getInternalEventDispatcher() {
+    private ConnectEventDispatcher<ConnectStateEvent> getInternalEventDispatcher() {
         if (internalEventDispatcher == null) {
-            internalEventDispatcher = new EventHandlerManager(target);
+            internalEventDispatcher = new ConnectEventDispatcher<>(target);
         }
         return internalEventDispatcher;
     }
