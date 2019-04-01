@@ -35,8 +35,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import com.gluonhq.connect.Level;
+import com.gluonhq.connect.Logger;
 
 /**
  * A utility class that provides useful methods when working with JSON data.

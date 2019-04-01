@@ -39,8 +39,10 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import com.gluonhq.connect.Level;
+import com.gluonhq.connect.Logger;
 
 /**
  * The DataProvider is the root entry to obtain instances of {@link GluonObservableObject} and

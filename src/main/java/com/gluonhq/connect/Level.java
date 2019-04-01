@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Gluon
+ * Copyright (c) 2016, 2018 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -24,15 +24,27 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-module com.gluonhq.connect {
-    requires java.json;
-//    requires java.logging;
-    requires java.xml.bind;
+package com.gluonhq.connect;
 
-    requires javafx.graphics;
+public class Level {
 
-    exports com.gluonhq.connect;
-    exports com.gluonhq.connect.converter;
-    exports com.gluonhq.connect.provider;
-    exports com.gluonhq.connect.source;
+    private final String name;
+    private final int value;
+
+
+    private Level(String name, int value) {
+        this.name = name;
+        this.value = value;
+    }
+
+    public static final Level WARNING = new Level("WARNING", 100);
+    public static final Level SEVERE = new Level("SEVERE", 900);
+    public static final Level INFO = new Level("INFO", 800);
+    public static final Level FINE = new Level("FINE", 500);
+    public static final Level FINER = new Level("FINE", 400);
+    public static final Level FINEST = new Level("FINE", 300);
+
+    public final int intValue() {
+        return value;
+    }
 }

@@ -1,7 +1,7 @@
 plugins {
     id "java-library"
     id "com.github.hierynomus.license" version "0.15.0"
-    id "org.openjfx.javafxplugin" version "0.0.6"
+    id "org.openjfx.javafxplugin" version "0.0.7"
 }
 
 apply from: rootProject.file('gradle/mavenPublish.gradle')
@@ -11,7 +11,7 @@ sourceCompatibility = 11
 targetCompatibility = 11
 
 group = 'com.gluonhq'
-version = '2.0.0-SNAPSHOT'
+version = '2.0.1-SNAPSHOT'
 
 repositories {
     jcenter()

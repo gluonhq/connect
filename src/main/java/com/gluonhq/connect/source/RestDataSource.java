@@ -44,8 +44,10 @@ import java.net.URLEncoder;
 import java.security.GeneralSecurityException;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import com.gluonhq.connect.Level;
+import com.gluonhq.connect.Logger;
 import java.util.zip.GZIPInputStream;
 
 /**

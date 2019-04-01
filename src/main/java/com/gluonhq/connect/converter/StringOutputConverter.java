@@ -29,8 +29,10 @@ package com.gluonhq.connect.converter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import com.gluonhq.connect.Level;
+import com.gluonhq.connect.Logger;
 
 /**
  * An OutputConverter that writes a string to an OutputStream.
