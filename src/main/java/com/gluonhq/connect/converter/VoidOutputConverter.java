@@ -28,8 +28,11 @@ package com.gluonhq.connect.converter;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import com.gluonhq.connect.Logger;
+import com.gluonhq.connect.Level;
+
 
 /**
  * An OutputConverter that doesn't write anything to an OutputStream.

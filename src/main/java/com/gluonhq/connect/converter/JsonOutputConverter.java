@@ -31,8 +31,11 @@ import javax.json.JsonObject;
 import javax.json.JsonWriter;
 import javax.json.JsonWriterFactory;
 import java.io.StringWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import com.gluonhq.connect.Logger;
+import com.gluonhq.connect.Level;
+
 
 /**
  * An OutputConverter that converts an object into a JSON Object that is written to an OutputStream. The actual

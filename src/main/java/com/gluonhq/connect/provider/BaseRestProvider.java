@@ -30,8 +30,11 @@ import com.gluonhq.connect.source.RestDataSource;
 
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import com.gluonhq.connect.Logger;
+import com.gluonhq.connect.Level;
+
 
 public class BaseRestProvider {
 

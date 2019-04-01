@@ -443,4 +443,23 @@ public class RestClient {
         dataSource.setHeaders(headers);
     }
 
+    @Override
+    public String toString() {
+        return "RestClient{" +
+                "host='" + host + '\'' +
+                ", path='" + path + '\'' +
+                ", method='" + method + '\'' +
+                ", readTimeout=" + readTimeout +
+                ", connectTimeout=" + connectTimeout +
+                ", dataString='" + dataString + '\'' +
+                ", consumerKey='" + consumerKey + '\'' +
+                ", consumerSecret='" + consumerSecret + '\'' +
+                ", headers=" + headers +
+                ", queryParams=" + queryParams +
+                ", formParams=" + formParams +
+                ", multipartStringFields=" + multipartStringFields +
+                ", multipartByteFields=" + multipartByteFields +
+                ", contentType='" + contentType + '\'' +
+                '}';
+    }
 }

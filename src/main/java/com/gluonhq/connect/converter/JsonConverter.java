@@ -54,8 +54,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import com.gluonhq.connect.Logger;
+import com.gluonhq.connect.Level;
 
 /**
  * A utility class to convert Java objects from JSON Objects and from JSON Objects into Java objects.
@@ -117,7 +119,7 @@ public class JsonConverter<T> {
             if (settersMappedByPropertyName != null) {
                 for (String property : settersMappedByPropertyName.keySet()) {
                     if (!json.containsKey(property)) {
-                        LOGGER.log(Level.FINE, "Property " + property + " not defined on json object for class " + targetClass + ".");
+//                        LOGGER.log(Level.FINE, "Property " + property + " not defined on json object for class " + targetClass + ".");
                         continue;
                     }
 

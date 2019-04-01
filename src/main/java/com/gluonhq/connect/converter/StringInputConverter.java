@@ -31,8 +31,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import com.gluonhq.connect.Logger;
+import com.gluonhq.connect.Level;
+
 
 /**
  * An InputConverter that reads a string from an InputStream.
