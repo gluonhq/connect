@@ -26,7 +26,7 @@
  */
 module com.gluonhq.connect {
     requires java.json;
-//    requires java.logging;
+    requires java.logging;
     requires java.xml.bind;
 
     requires javafx.graphics;

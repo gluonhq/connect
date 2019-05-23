@@ -26,8 +26,6 @@
  */
 package com.gluonhq.connect.converter;
 
-import com.gluonhq.connect.Level;
-import com.gluonhq.connect.Logger;
 import com.gluonhq.impl.connect.converter.ClassInspector;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.DoubleProperty;
@@ -56,8 +54,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A utility class to convert Java objects from JSON Objects and from JSON Objects into Java objects.
