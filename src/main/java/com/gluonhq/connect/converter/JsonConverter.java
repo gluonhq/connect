@@ -111,7 +111,11 @@ public class JsonConverter<T> {
         T t = null;
 
         try {
-            t = targetClass.newInstance();
+            if (! "java.util.Map".equals(targetClass.getName())) {
+                t = targetClass.getDeclaredConstructor().newInstance();
+            } else {
+                LOGGER.log(Level.WARNING, "Map not yet supported");
+            }
 
             Map<String, Method> settersMappedByPropertyName = this.inspector.getSetters();
             if (settersMappedByPropertyName != null) {
