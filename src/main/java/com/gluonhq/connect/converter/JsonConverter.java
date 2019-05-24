@@ -111,7 +111,7 @@ public class JsonConverter<T> {
         T t = null;
 
         try {
-            if (! "java.util.Map".equals(targetClass.getName())) {
+            if (! Map.class.isAssignableFrom(targetClass)) {
                 t = targetClass.getDeclaredConstructor().newInstance();
             } else {
                 LOGGER.log(Level.WARNING, "Map not yet supported");
