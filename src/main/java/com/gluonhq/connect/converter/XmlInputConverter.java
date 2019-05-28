@@ -33,11 +33,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.Set;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-import com.gluonhq.connect.Logger;
-import com.gluonhq.connect.Level;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;

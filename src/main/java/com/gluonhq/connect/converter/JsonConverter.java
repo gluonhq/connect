@@ -54,10 +54,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-import com.gluonhq.connect.Logger;
-import com.gluonhq.connect.Level;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A utility class to convert Java objects from JSON Objects and from JSON Objects into Java objects.
@@ -113,13 +111,17 @@ public class JsonConverter<T> {
         T t = null;
 
         try {
-            t = targetClass.newInstance();
+            if (! Map.class.isAssignableFrom(targetClass)) {
+                t = targetClass.getDeclaredConstructor().newInstance();
+            } else {
+                LOGGER.log(Level.WARNING, "Map not yet supported");
+            }
 
             Map<String, Method> settersMappedByPropertyName = this.inspector.getSetters();
             if (settersMappedByPropertyName != null) {
                 for (String property : settersMappedByPropertyName.keySet()) {
                     if (!json.containsKey(property)) {
-//                        LOGGER.log(Level.FINE, "Property " + property + " not defined on json object for class " + targetClass + ".");
+                        LOGGER.log(Level.FINEST, "Property " + property + " not defined on json object for class " + targetClass + ".");
                         continue;
                     }
 

@@ -1,7 +1,7 @@
 plugins {
     id "java-library"
     id "com.github.hierynomus.license" version "0.15.0"
-    id "org.openjfx.javafxplugin" version "0.0.6"
+    id "org.openjfx.javafxplugin" version "0.0.7"
 }
 
 apply from: rootProject.file('gradle/mavenPublish.gradle')

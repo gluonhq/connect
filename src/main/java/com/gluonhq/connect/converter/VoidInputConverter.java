@@ -28,11 +28,8 @@ package com.gluonhq.connect.converter;
 
 import java.io.IOException;
 import java.io.InputStream;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-import com.gluonhq.connect.Logger;
-import com.gluonhq.connect.Level;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * An InputConverter that reads the entire InputStream, while discarding its contents.
