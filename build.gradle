@@ -37,7 +37,7 @@ compileJava {
 }
 
 javafx {
-    version '11'
+    version '15'
     modules 'javafx.graphics'
 }
 
