@@ -1,5 +1,4 @@
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+import java.time.Duration
 
 task sourcesJar(type: Jar) {
     from sourceSets.main.allJava
@@ -57,18 +56,6 @@ publishing {
             }
         }
     }
-
-    repositories {
-        maven {
-            // to upload release, use:
-            // ./gradlew -PrepositoryUrl=https://oss.sonatype.org/service/local/staging/deploy/maven2 publish
-            url = getStringProperty('repositoryUrl', 'https://oss.sonatype.org/content/repositories/snapshots/')
-            credentials {
-                username = getStringPropertyDefaultAsProperty('repositoryUsername', 'sonatypeUsername')
-                password = getStringPropertyDefaultAsProperty('repositoryPassword', 'sonatypePassword')
-            }
-        }
-    }
 }
 
 signing {
@@ -76,24 +63,18 @@ signing {
     required = { gradle.taskGraph.hasTask(publish) && !version.endsWith("SNAPSHOT") }
 }
 
-private String getStringProperty(String name, String defaultValue) {
-    if (!project.hasProperty(name)) {
-        return defaultValue
+nexusPublishing {
+    repositories {
+        sonatype()
     }
-
-    def propertyValue = project.property(name)
-    return propertyValue != null ? propertyValue.toString().trim() : defaultValue
+    // credentials are shared from staging plugin
+    clientTimeout = Duration.ofMinutes(5)
+    connectTimeout = Duration.ofMinutes(5)
 }
 
-private String getStringPropertyDefaultAsProperty(String name, String defaultProperty) {
-    if (!project.hasProperty(name)) {
-        return project.hasProperty(defaultProperty) ? project.property(defaultProperty) : System.getenv(name)
-    }
-
-    def propertyValue = project.property(name)
-    if (propertyValue != null) {
-        return propertyValue.toString().trim()
-    } else {
-        return project.hasProperty(defaultProperty) ? project.property(defaultProperty) : System.getenv(name)
-    }
+nexusStaging {
+    username = project.hasProperty('sonatypeUsername') ? project.property('sonatypeUsername') : ''
+    password = project.hasProperty('sonatypePassword') ? project.property('sonatypePassword') : ''
+    numberOfRetries = 30
+    delayBetweenRetriesInMillis = 5000
 }
