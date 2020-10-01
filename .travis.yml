@@ -27,7 +27,7 @@ cache:
 # Deploy releases on every tag push
 deploy:
   - provider: script
-    script: ./gradlew publish -PrepositoryUrl=$mavenPublishURL/public-snapshots/ -PrepositoryUsername=$mavenPublishUsername -PrepositoryPassword=$mavenPublishPassword
+    script: ./gradlew publish -PsonatypeUsername=$SONATYPE_USERNAME -PsonatypePassword=$SONATYPE_PASSWORD
     skip_cleanup: true
     on:
       branch: master
