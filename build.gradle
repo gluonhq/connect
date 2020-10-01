@@ -1,7 +1,10 @@
 plugins {
     id "java-library"
+    id 'signing'
     id "com.github.hierynomus.license" version "0.15.0"
-    id "org.openjfx.javafxplugin" version "0.0.7"
+    id "org.openjfx.javafxplugin" version "0.0.9"
+    id 'io.codearte.nexus-staging' version '0.22.0'
+    id 'de.marcphilipp.nexus-publish' version '0.4.0'
 }
 
 apply from: rootProject.file('gradle/mavenPublish.gradle')
@@ -11,7 +14,7 @@ sourceCompatibility = 11
 targetCompatibility = 11
 
 group = 'com.gluonhq'
-version = '2.0.1'
+version = '2.0.2-SNAPSHOT'
 
 repositories {
     jcenter()
@@ -34,6 +37,7 @@ compileJava {
 }
 
 javafx {
+    version '15'
     modules 'javafx.graphics'
 }
 
@@ -42,7 +46,9 @@ test {
 }
 
 javadoc {
-//    exclude('com/gluonhq/impl/**/*')
-
-    options.addStringOption("-add-exports", "javafx.base/com.sun.javafx.event=com.gluonhq.connect")
+    exclude("com/gluonhq/impl/**/*")
+    options.addStringOption("-source-path", "src/main/java")
+    options.addBooleanOption("javafx").setValue(true)
+    options.links("https://openjfx.io/javadoc/" + "${javafx.version}".substring(0,2))
+    options.links("https://docs.oracle.com/en/java/javase/" + JavaVersion.current().majorVersion + "/docs/api")
 }

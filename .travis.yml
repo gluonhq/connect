@@ -10,6 +10,11 @@ sudo: false
 os:
   - linux
 
+addons:
+  apt:
+    packages:
+      - s3cmd
+
 # run maven build
 script:
   - ./gradlew clean build
@@ -28,7 +33,7 @@ deploy:
       branch: master
 
   - provider: script
-    script: ./gradlew publish -PrepositoryUrl=$mavenPublishURL/releases/ -PrepositoryUsername=$mavenPublishUsername -PrepositoryPassword=$mavenPublishPassword
+    script: bash .ci/release.sh
     skip_cleanup: true
     on:
       tags: true
