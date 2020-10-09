@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018 Gluon
+ * Copyright (c) 2018, 2020 Gluon
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -23,6 +23,10 @@
  * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
+ * Client-side library to simplify data-binding between JavaFX controls and any data-source.
  */
 module com.gluonhq.connect {
     requires java.json;
