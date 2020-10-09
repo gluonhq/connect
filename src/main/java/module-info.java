@@ -26,7 +26,7 @@
  */
 
 /**
- * Client-side library to simplify data-binding between JavaFX controls and any data-source.
+ * Defines APIs to simplify data-binding between JavaFX controls and any data-source.
  */
 module com.gluonhq.connect {
     requires java.json;
