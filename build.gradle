@@ -1,14 +1,13 @@
 plugins {
     id "java-library"
     id 'signing'
-    id "com.github.hierynomus.license" version "0.15.0"
-    id "org.openjfx.javafxplugin" version "0.0.9"
+    id "org.openjfx.javafxplugin" version "0.0.10"
     id 'io.codearte.nexus-staging' version '0.22.0'
     id 'de.marcphilipp.nexus-publish' version '0.4.0'
 }
 
 apply from: rootProject.file('gradle/mavenPublish.gradle')
-apply from: rootProject.file('gradle/code-quality.gradle')
+// apply from: rootProject.file('gradle/code-quality.gradle')
 
 sourceCompatibility = 11
 targetCompatibility = 11
@@ -17,7 +16,7 @@ group = 'com.gluonhq'
 version = '2.0.2-SNAPSHOT'
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -25,7 +24,7 @@ dependencies {
     implementation 'javax.xml.bind:jaxb-api:2.3.1'
 
     testImplementation 'io.vertx:vertx-core:3.6.0'
-    testImplementation 'org.testng:testng:6.9.10'
+    testImplementation 'org.testng:testng:7.4.0'
     testRuntimeOnly 'org.glassfish:jakarta.json:1.1.5:module'
 }
 
