@@ -140,9 +140,9 @@ public class JsonConverterTest {
         assertEquals(object.getIntegerMap().get("int2key"), Integer.valueOf(2));
         assertEquals(object.getIntegerMap().get("int3key"), Integer.valueOf(3));
         assertEquals(object.getDoubleMap().size(), 3);
-        assertEquals(object.getDoubleMap().get("dbl1key"), 1.0);
-        assertEquals(object.getDoubleMap().get("dbl2key"), 2.1);
-        assertEquals(object.getDoubleMap().get("dbl3key"), 3.91);
+        assertEquals(object.getDoubleMap().get("dbl1key").doubleValue(), 1.0);
+        assertEquals(object.getDoubleMap().get("dbl2key").doubleValue(), 2.1);
+        assertEquals(object.getDoubleMap().get("dbl3key").doubleValue(), 3.91);
         assertEquals(object.getBooleanMap().size(), 3);
         assertEquals(object.getBooleanMap().get("bool1key"), Boolean.TRUE);
         assertEquals(object.getBooleanMap().get("bool2key"), Boolean.FALSE);
@@ -250,8 +250,8 @@ public class JsonConverterTest {
         assertTrue(jsonObject.containsKey("aBoolean"));
         assertEquals(Boolean.valueOf(jsonObject.getBoolean("aBoolean")), object.getABoolean());
         assertEquals(Byte.valueOf((byte) jsonObject.getJsonNumber("aByte").intValue()), object.getAByte());
-        assertEquals(jsonObject.getJsonNumber("aDouble").doubleValue(), object.getADouble());
-        assertEquals(Double.valueOf(jsonObject.getJsonNumber("aFloat").doubleValue()).floatValue(), object.getAFloat());
+        assertEquals(jsonObject.getJsonNumber("aDouble").doubleValue(), object.getADouble().doubleValue());
+        assertEquals(Double.valueOf(jsonObject.getJsonNumber("aFloat").doubleValue()).floatValue(), object.getAFloat().floatValue());
         assertEquals(Integer.valueOf(jsonObject.getInt("anInteger")), object.getAnInteger());
         assertEquals(Long.valueOf(jsonObject.getJsonNumber("aLong").longValue()), object.getALong());
         assertEquals(Short.valueOf((short) jsonObject.getInt("aShort")), object.getAShort());
